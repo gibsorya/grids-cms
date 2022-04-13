@@ -14,4 +14,4 @@ services:
     depends_on:
       - db
     volumes:
-      - .:/app
+      - .:/grids-cms

@@ -5,14 +5,9 @@ RUN apt-get update && apt-get install -y \
     yarn \
     nodejs
 
-WORKDIR /app
-# COPY . /app/
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
-
-# ENV BUNDLE_PATH /gems
-# RUN yarn install
-# RUN bundle install
+WORKDIR /grids-cms
+COPY Gemfile /grids-cms/Gemfile
+COPY Gemfile.lock /grids-cms/Gemfile.lock
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
