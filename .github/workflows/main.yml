@@ -32,7 +32,7 @@ jobs:
         RAILS_ENV: test
       run: |
         bin/rails db:create db:schema:load
-        bundle exec rspec --rand
+        bundle exec rspec --order rand
 
   rubocop:
     runs-on: ubuntu-latest
