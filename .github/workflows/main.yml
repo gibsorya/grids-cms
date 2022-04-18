@@ -1,0 +1,25 @@
+name: Grids CI
+
+on: [push, pull_request]
+
+jobs:
+  rspec:
+    runs-on: ubunto-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 3.1.1
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Run RSpec
+      run: bundle exec rspec --rand
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 3.1.1
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Run RuboCop
+      run: bundle exec rubocop --parallel
