@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /grids-cms
 COPY Gemfile /grids-cms/Gemfile
 COPY Gemfile.lock /grids-cms/Gemfile.lock
+RUN bundle install
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
