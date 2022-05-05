@@ -45,7 +45,7 @@ body {
 
 .label {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 18px;
     color: #333;
     line-height: 20px;
 }
@@ -53,7 +53,9 @@ body {
 .input {
     border: 1px solid #cccccc;
     margin-bottom: 10px;
-    padding: 8px 12px;
+    padding: 20px 0px 20px 8px;
+    width: 200px;
+    font-size: 16px;
 }
 
 .field {
