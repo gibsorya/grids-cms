@@ -143,3 +143,7 @@ Style/SymbolArray:
 # URISchemes: http, https
 Layout/LineLength:
   Max: 154
+
+Rails/HasManyOrHasOneDependent:
+  Exclude:
+    - 'app/models/content.rb'
