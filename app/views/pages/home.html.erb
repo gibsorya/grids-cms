@@ -1,5 +1,5 @@
 <% if current_user %>
-    <p>Hello <%= current_user.email %>!</p>
+    <p>Hello <%= current_user.username %>!</p>
     <p>Your role is: <%= current_user.role %>
     <% if current_user.admin? %>
         <p>There are <%= User.count %> users.</p>
