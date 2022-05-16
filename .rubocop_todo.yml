@@ -147,3 +147,7 @@ Layout/LineLength:
 Rails/HasManyOrHasOneDependent:
   Exclude:
     - 'app/models/content.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
