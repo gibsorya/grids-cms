@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_16_232119) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_19_145400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,17 +65,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_16_232119) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "field_types", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "fields", force: :cascade do |t|
     t.string "name"
-    t.bigint "field_type_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["field_type_id"], name: "index_fields_on_field_type_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,5 +89,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_16_232119) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "content_types", "contents"
-  add_foreign_key "fields", "field_types"
 end
