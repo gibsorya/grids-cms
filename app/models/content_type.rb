@@ -1,4 +1,3 @@
 class ContentType < ApplicationRecord
-  belongs_to :content
-  has_many :fields
+  has_and_belongs_to_many :fields
 end

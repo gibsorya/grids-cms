@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_19_145400) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_21_045810) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,17 +52,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_145400) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "content_types", force: :cascade do |t|
-    t.string "name"
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "content_id", null: false
-    t.index ["content_id"], name: "index_content_types_on_content_id"
+  end
+
+  create_table "content_types", force: :cascade do |t|
+  end
+
+  create_table "content_types_fields", id: false, force: :cascade do |t|
+    t.bigint "field_id"
+    t.bigint "content_type_id"
+    t.index ["content_type_id"], name: "index_content_types_fields_on_content_type_id"
+    t.index ["field_id"], name: "index_content_types_fields_on_field_id"
   end
 
   create_table "contents", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "name"
+    t.bigint "content_type_id"
+    t.index ["content_type_id"], name: "index_contents_on_content_type_id"
   end
 
   create_table "fields", force: :cascade do |t|
@@ -83,10 +93,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_19_145400) do
     t.string "username", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "unique_usernames", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "content_types", "contents"
 end
