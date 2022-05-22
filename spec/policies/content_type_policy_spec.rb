@@ -13,7 +13,14 @@ RSpec.describe ContentTypePolicy, type: :policy do
                 it 'can create a new content type' do
                     expect(subject).to permit(user, ContentType.new)
                 end
-                it 'can create a new content type with fields' do
+                it 'can create a new content type with a field list', focus: true do
+                    # Setup
+                        # f1 = create(:field)
+                        # puts f1.name
+                    # # Action
+                    #     fields << f1
+                    # Assert
+                        # expect(subject).to permit(user, ContentType.new(fields: fields))
                 end
             end
             permissions :update? do

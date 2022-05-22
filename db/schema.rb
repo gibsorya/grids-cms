@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_21_060006) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_22_210801) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,14 +52,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_060006) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "content_types", force: :cascade do |t|
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "content_types_fields", id: false, force: :cascade do |t|
-    t.bigint "field_id"
-    t.bigint "content_type_id"
-    t.index ["content_type_id"], name: "index_content_types_fields_on_content_type_id"
-    t.index ["field_id"], name: "index_content_types_fields_on_field_id"
+  create_table "content_types", force: :cascade do |t|
   end
 
   create_table "contents", force: :cascade do |t|
@@ -68,18 +68,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_060006) do
     t.index ["content_type_id"], name: "index_contents_on_content_type_id"
   end
 
+  create_table "field_lists", force: :cascade do |t|
+    t.bigint "content_type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_type_id"], name: "index_field_lists_on_content_type_id"
+  end
+
+  create_table "field_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fields", force: :cascade do |t|
+    t.bigint "field_type_id", null: false
+    t.bigint "field_list_id", null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type", null: false
-  end
-
-  create_table "fields_content_types", id: false, force: :cascade do |t|
-    t.bigint "field_id"
-    t.bigint "content_type_id"
-    t.index ["content_type_id"], name: "index_fields_content_types_on_content_type_id"
-    t.index ["field_id"], name: "index_fields_content_types_on_field_id"
+    t.index ["field_list_id"], name: "index_fields_on_field_list_id"
+    t.index ["field_type_id"], name: "index_fields_on_field_type_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -94,9 +104,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_21_060006) do
     t.string "username", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "unique_usernames", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "field_lists", "content_types"
+  add_foreign_key "fields", "field_lists"
+  add_foreign_key "fields", "field_types"
 end

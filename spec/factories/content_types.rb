@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :content_type do
-    # id { 0 }
+    # fields { [ field ] }
+    # association :field
 
     after(:create) do |content_type|
-      # create_list(:field, 3, content_type: content_type)
+
     end
   end
 end

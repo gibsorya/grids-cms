@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :field do
-    name { "Field" }
-    content_type
+    field_type { nil }
+    field_list { nil }
+    name { "MyString" }
   end
 end
